@@ -9,21 +9,19 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND (express or implied).
 
-pragma solidity ^0.4.8;
+pragma solidity ^0.4.10;
 
-import 'ds-aver/aver.sol';
-
-contract DSMath is DSAver {
+contract DSMath {
     function incr(uint128 x, uint128 y) constant returns (uint128 z) {
-        aver((z = x + y) >= x);
+        assert((z = x + y) >= x);
     }
 
     function decr(uint128 x, uint128 y) constant returns (uint128 z) {
-        aver((z = x - y) <= x);
+        assert((z = x - y) <= x);
     }
 
     function cast(uint256 x) constant returns (uint128 z) {
-        aver((z = uint128(x)) == x);
+        assert((z = uint128(x)) == x);
     }
 
     uint128 constant WAD = 10 ** 18;
