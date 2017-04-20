@@ -11,56 +11,77 @@
 
 pragma solidity ^0.4.10;
 
-contract DSMath {
-    function incr(uint128 x, uint128 y) constant returns (uint128 z) {
-        assert((z = x + y) >= x);
+contract OverflowProtectable {
+    // ensure that the result of adding x and y is valid 
+    function safeAdd(uint128 x, uint128 y) constant returns (uint128 z) {
+        assert( (z = x + y) >= x);
+    }
+ 
+    // ensure that the result of subtracting x and y is valid 
+    function safeSub(uint128 x, uint128 y) constant returns (uint128 z) {
+        assert( (z = x - y) <= x);
     }
 
-    function decr(uint128 x, uint128 y) constant returns (uint128 z) {
-        assert((z = x - y) <= x);
+    // ensure that the resulting integer is 128 bits
+    function ensure128Bit(uint256 x) constant returns (uint128 z) {
+        assert( (z = uint128(x)) == x);
     }
 
-    function cast(uint256 x) constant returns (uint128 z) {
-        assert((z = uint128(x)) == x);
+    uint128 constant BP18 = 10 ** 18;  // scales token balance to precision of 18 digits
+    uint128 constant BP36 = 10 ** 36;  // scales token balance to precision of 36 digits
+
+    function safeBP18Mult(uint128 x, uint128 y) constant returns (uint128 z) {
+        // x*y + 500000000000000000
+        // -------------------------
+        //      1000000000000000000
+        z = ensure128Bit(( (uint256(x) * y) + (BP18 / 2) ) / BP18);
+    }
+    function safeBP18Div(uint128 x, uint128 y) constant returns (uint128 z) {
+        //  x * 500000000000000000 + y/2
+        //  ----------------------------
+        //               y
+        z = ensure128Bit(( (uint256(x) * BP18) + (y / 2) ) / y);
+    }
+    
+    function safeBP36Mult(uint128 x, uint128 y) constant returns (uint128 z) {
+        //  x*y + 500000000000000000000000000000000000
+        //  ------------------------------------------
+        //       1000000000000000000000000000000000000
+        z = ensure128Bit(( (uint256(x) * y) + (BP36 / 2) ) / BP36);
     }
 
-    uint128 constant WAD = 10 ** 18;
-
-    function wmul(uint128 x, uint128 y) constant returns (uint128 z) {
-        z = cast((uint256(x) * y + WAD / 2) / WAD);
+    function safeBP36Div(uint128 x, uint128 y) constant returns (uint128 z) {
+        z = ensure128Bit(( (uint256(x) * BP36) + (y / 2) ) / y);
     }
 
-    function wdiv(uint128 x, uint128 y) constant returns (uint128 z) {
-        z = cast((uint256(x) * WAD + y / 2) / y);
-    }
-
-    uint128 constant RAY = 10 ** 36;
-
-    function rmul(uint128 x, uint128 y) constant returns (uint128 z) {
-        z = cast((uint256(x) * y + RAY / 2) / RAY);
-    }
-
-    function rdiv(uint128 x, uint128 y) constant returns (uint128 z) {
-        z = cast((uint256(x) * RAY + y / 2) / y);
-    }
-
-    function rpow(uint128 x, uint64 n) constant returns (uint128 z) {
-        z = n % 2 != 0 ? x : RAY;
-
+    function safeBP36Power(uint128 x, uint64 n) constant returns (uint128 z) {
+        // if n / 2 doesn't yield a remainder of 0, 
+        // z = x, 
+        // else, 
+        // z = 10**36
+        z = n % 2 != 0 ? x : BP36;
+        // n = n / 2; while n isn't 0, n = n / 2
         for (n /= 2; n != 0; n /= 2) {
-            x = rmul(x, x);
-
+            x = safeBP36Mult(x, x);
+            // if n / 2 doesn't yield a remainder of 0, 
             if (n % 2 != 0) {
-                z = rmul(z, x);
+                z = safeBP36Mult(z, x);
             }
         }
     }
-
+    // return minimum of two values
     function min(uint128 x, uint128 y) constant internal returns (uint128 z) {
         return (x <= y) ? x : y;
     }
+    // return maximum of two values
     function max(uint128 x, uint128 y) constant internal returns (uint128 z) {
         return (x >= y) ? x : y;
+    }
+    // helper
+    function assert(bool assertion) internal {
+        if (!assertion) {
+          throw;
+        }
     }
 
 }
