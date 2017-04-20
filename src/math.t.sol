@@ -1,48 +1,47 @@
 pragma solidity ^0.4.8;
 
-import "ds-test/test.sol";
 import "./math.sol";
 
-contract Test is DSTest, DSMath {
-    function testFail_incr() {
-        incr(2 ** 128 - 1, 1);
+contract Test is OverflowProtectable {
+    function testFail_safeAdd() {
+        safeAdd(2 ** 128 - 1, 1);
     }
-    function test_incr() {
-        assertEq(uint(incr(2 ** 128 - 1, 0)), 2 ** 128 - 1);
-        assertEq(uint(incr(1.2 ether, 3.4 ether)), 4.6 ether);
-    }
-
-    function testFail_decr() {
-        decr(3.4 ether, 3.4 ether + 1 wei);
-    }
-    function test_decr() {
-        assertEq(uint(decr(3.4 ether, 1.2 ether)), 2.2 ether);
+    function test_safeAdd() {
+        assertEq(uint(safeAdd(2 ** 128 - 1, 0)), 2 ** 128 - 1);
+        assertEq(uint(safeAdd(1.2 ether, 3.4 ether)), 4.6 ether);
     }
 
-    function testFail_wmul_overflow() {
-        wmul(2 ** 128 - 1, 1.0 ether + 1 wei);
+    function testFail_safeSub() {
+        safeSub(3.4 ether, 3.4 ether + 1 wei);
     }
-    function test_wmul_trivial() {
-        assertEq(uint(wmul(2 ** 128 - 1, 1.0 ether)), 2 ** 128 - 1);
-        assertEq(uint(wmul(0.0 ether, 0.0 ether)), 0.0 ether);
-        assertEq(uint(wmul(0.0 ether, 1.0 ether)), 0.0 ether);
-        assertEq(uint(wmul(1.0 ether, 0.0 ether)), 0.0 ether);
-        assertEq(uint(wmul(1.0 ether, 1.0 ether)), 1.0 ether);
-    }
-    function test_wmul_fractions() {
-        assertEq(uint(wmul(1.0 ether, 0.2 ether)), 0.2 ether);
-        assertEq(uint(wmul(2.0 ether, 0.2 ether)), 0.4 ether);
+    function test_safeSub() {
+        assertEq(uint(safeSub(3.4 ether, 1.2 ether)), 2.2 ether);
     }
 
-    function testFail_wdiv_zero() {
-        wdiv(1.0 ether, 0.0 ether);
+    function testFail_safeBP18Mult_overflow() {
+        safeBP18Mult(2 ** 128 - 1, 1.0 ether + 1 wei);
     }
-    function test_wdiv_trivial() {
-        assertEq(uint(wdiv(0.0 ether, 1.0 ether)), 0.0 ether);
-        assertEq(uint(wdiv(1.0 ether, 1.0 ether)), 1.0 ether);
+    function test_safeBP18Mult_trivial() {
+        assertEq(uint(safeBP18Mult(2 ** 128 - 1, 1.0 ether)), 2 ** 128 - 1);
+        assertEq(uint(safeBP18Mult(0.0 ether, 0.0 ether)), 0.0 ether);
+        assertEq(uint(safeBP18Mult(0.0 ether, 1.0 ether)), 0.0 ether);
+        assertEq(uint(safeBP18Mult(1.0 ether, 0.0 ether)), 0.0 ether);
+        assertEq(uint(safeBP18Mult(1.0 ether, 1.0 ether)), 1.0 ether);
     }
-    function test_wdiv_fractions() {
-        assertEq(uint(wdiv(1.0 ether, 2.0 ether)), 0.5 ether);
-        assertEq(uint(wdiv(2.0 ether, 2.0 ether)), 1.0 ether);
+    function test_safeBP18Mult_fractions() {
+        assertEq(uint(safeBP18Mult(1.0 ether, 0.2 ether)), 0.2 ether);
+        assertEq(uint(safeBP18Mult(2.0 ether, 0.2 ether)), 0.4 ether);
+    }
+
+    function testFail_safeBP18Div_zero() {
+        safeBP18Div(1.0 ether, 0.0 ether);
+    }
+    function test_safeBP18Div_trivial() {
+        assertEq(uint(safeBP18Div(0.0 ether, 1.0 ether)), 0.0 ether);
+        assertEq(uint(safeBP18Div(1.0 ether, 1.0 ether)), 1.0 ether);
+    }
+    function test_safeBP18Div_fractions() {
+        assertEq(uint(safeBP18Div(1.0 ether, 2.0 ether)), 0.5 ether);
+        assertEq(uint(safeBP18Div(2.0 ether, 2.0 ether)), 1.0 ether);
     }
 }
