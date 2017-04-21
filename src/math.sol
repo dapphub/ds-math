@@ -34,12 +34,7 @@ contract DSMath {
     }
 
     function pow(uint256 x, uint256 n) constant internal returns (uint256 z) {
-        
-        z = (x == 0 && n > 0) ? 0 : 1;
-
-        for (uint i = 0; i < n; i++) {
-            assert((z = mul(z, x)) >= x);
-        }
+        assert((z = x ** n) >= x);
     } 
 
     function min(uint256 x, uint256 y) constant internal returns (uint256 z) {
@@ -71,12 +66,7 @@ contract DSMath {
     }
 
     function hpow(uint128 x, uint128 n) constant internal returns (uint128 z) {
-        
-        z = (x == 0 && n > 0) ? 0 : 1;
-
-        for (uint i = 0; i < n; i++) {
-            assert((z = hmul(z, x)) >= x);
-        }
+        assert((z = x ** n) >= x);
     }
 
     function hmin(uint128 x, uint128 y) constant internal returns (uint128 z) {
@@ -106,18 +96,6 @@ contract DSMath {
 
     function idiv(int256 x, int256 y) constant internal returns (int256 z) {
         z = x / y;
-    }
-
-    function ipow(int256 x, int256 n) constant internal returns (int256 z) {
-        assert(!(x == 0 && n < 0));
-
-        // 0^n = 0
-        // 1^n = 1
-        z = ((x == 0 && n > 0) || (x != 1 && n < 0)) ? 0 : 1;
-
-        for (int i = 0; i < n; i++) {
-            z = imul(z, x);
-        }
     }
 
     function imin(int256 x, int256 y) constant internal returns (int256 z) {

@@ -173,15 +173,6 @@ contract DSMathTest is DSTest, DSMath {
         assertEq(int(idiv(4, -2)), -2);
     }
 
-    function test_ipow() {
-        assertEq(int(ipow(0, 0)), 1);
-        assertEq(int(ipow(0, 1)), 0);
-        assertEq(int(ipow(1, 1)), 1);
-        assertEq(int(ipow(2, 2)), 4);
-        assertEq(int(ipow(1, -2)), 1);
-        assertEq(int(ipow(2, -2)), 0);
-    }
-
     function test_imin() {
         assertEq(int(imin(1, 1)), 1);
         assertEq(int(imin(1, 2)), 1);
