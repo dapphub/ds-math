@@ -194,4 +194,31 @@ contract DSMathTest is DSTest, DSMath {
         assertEq(int(imax(1, -2)), 1);
     }
 
+    function testFail_wmul_overflow() {
+        wmul(2 ** 128 - 1, 1.0 ether + 1 wei);
+    }
+    function test_wmul_trivial() {
+        assertEq(uint(wmul(2 ** 128 - 1, 1.0 ether)), 2 ** 128 - 1);
+        assertEq(uint(wmul(0.0 ether, 0.0 ether)), 0.0 ether);
+        assertEq(uint(wmul(0.0 ether, 1.0 ether)), 0.0 ether);
+        assertEq(uint(wmul(1.0 ether, 0.0 ether)), 0.0 ether);
+        assertEq(uint(wmul(1.0 ether, 1.0 ether)), 1.0 ether);
+    }
+    function test_wmul_fractions() {
+        assertEq(uint(wmul(1.0 ether, 0.2 ether)), 0.2 ether);
+        assertEq(uint(wmul(2.0 ether, 0.2 ether)), 0.4 ether);
+    }
+
+    function testFail_wdiv_zero() {
+        wdiv(1.0 ether, 0.0 ether);
+    }
+    function test_wdiv_trivial() {
+        assertEq(uint(wdiv(0.0 ether, 1.0 ether)), 0.0 ether);
+        assertEq(uint(wdiv(1.0 ether, 1.0 ether)), 1.0 ether);
+    }
+    function test_wdiv_fractions() {
+        assertEq(uint(wdiv(1.0 ether, 2.0 ether)), 0.5 ether);
+        assertEq(uint(wdiv(2.0 ether, 2.0 ether)), 1.0 ether);
+    }
+
 }
