@@ -54,10 +54,6 @@ contract DSMathTest is DSTest, DSMath {
         assertEq(uint(div(4, 2)), 2);
     }
 
-    function testFail_pow() {
-        pow(2 ** 256 - 1, 2);
-    }
-
     function test_pow() {
         assertEq(uint(pow(0, 0)), 1);
         assertEq(uint(pow(0, 1)), 0);
@@ -114,10 +110,6 @@ contract DSMathTest is DSTest, DSMath {
         assertEq(uint(hdiv(0, 1)), 0);
         assertEq(uint(hdiv(1, 1)), 1);
         assertEq(uint(hdiv(4, 2)), 2);
-    }
-
-    function testFail_hpow() {
-        hpow(2 ** 128 - 1, 2);
     }
 
     function test_hpow() {

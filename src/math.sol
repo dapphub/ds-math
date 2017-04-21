@@ -34,7 +34,7 @@ contract DSMath {
     }
 
     function pow(uint256 x, uint256 n) constant internal returns (uint256 z) {
-        assert((z = x ** n) >= x);
+        z = x ** n;
     } 
 
     function min(uint256 x, uint256 y) constant internal returns (uint256 z) {
@@ -66,7 +66,7 @@ contract DSMath {
     }
 
     function hpow(uint128 x, uint128 n) constant internal returns (uint128 z) {
-        assert((z = x ** n) >= x);
+        z = x ** n;
     }
 
     function hmin(uint128 x, uint128 y) constant internal returns (uint128 z) {
