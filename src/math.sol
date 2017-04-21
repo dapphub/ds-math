@@ -73,23 +73,6 @@ contract DSMath {
     int256 functions
      */
 
-
-    function iadd(int256 x, int256 y) constant internal returns (int256 z) {
-        z = x + y;
-    }
-
-    function isub(int256 x, int256 y) constant internal returns (int256 z) {
-        z = x - y;
-    }
-
-    function imul(int256 x, int256 y) constant internal returns (int256 z) {
-        z = x * y;
-    }
-
-    function idiv(int256 x, int256 y) constant internal returns (int256 z) {
-        z = x / y;
-    }
-
     function imin(int256 x, int256 y) constant internal returns (int256 z) {
         return (x <= y) ? x : y;
     }

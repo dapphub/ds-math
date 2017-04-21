@@ -117,40 +117,6 @@ contract DSMathTest is DSTest, DSMath {
 
     // int256 tests
 
-    function test_iadd() {
-        assertEq(int(iadd(0, 0)), 0);
-        assertEq(int(iadd(0, -1)), -1);
-        assertEq(int(iadd(0, 1)), 1);
-        assertEq(int(iadd(1, 1)), 2);
-        assertEq(int(iadd(-1, 1)), 0);
-    }
-
-    function test_isub() {
-        assertEq(int(isub(0, 0)), 0);
-        assertEq(int(isub(0, 1)), -1);
-        assertEq(int(isub(0, -1)), 1);
-        assertEq(int(isub(1, 1)), 0);
-        assertEq(int(isub(2, 1)), 1);
-    }
-
-    function test_imul() {
-        assertEq(int(imul(0, 1)), 0);
-        assertEq(int(imul(1, 1)), 1);
-        assertEq(int(imul(2, 1)), 2);
-        assertEq(int(idiv(2, -1)), -2);
-    }
-
-    function testFail_idiv() {
-        idiv(0, 0);
-    }
-
-    function test_idiv() {
-        assertEq(int(idiv(0, 1)), 0);
-        assertEq(int(idiv(1, 1)), 1);
-        assertEq(int(idiv(4, 2)), 2);
-        assertEq(int(idiv(4, -2)), -2);
-    }
-
     function test_imin() {
         assertEq(int(imin(1, 1)), 1);
         assertEq(int(imin(1, 2)), 1);
