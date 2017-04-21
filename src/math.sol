@@ -33,10 +33,6 @@ contract DSMath {
         z = x / y;
     }
 
-    function pow(uint256 x, uint256 n) constant internal returns (uint256 z) {
-        z = x ** n;
-    } 
-
     function min(uint256 x, uint256 y) constant internal returns (uint256 z) {
         return (x <= y) ? x : y;
     }
@@ -63,10 +59,6 @@ contract DSMath {
 
     function hdiv(uint128 x, uint128 y) constant internal returns (uint128 z) {
         z = x / y;
-    }
-
-    function hpow(uint128 x, uint128 n) constant internal returns (uint128 z) {
-        z = x ** n;
     }
 
     function hmin(uint128 x, uint128 y) constant internal returns (uint128 z) {
@@ -125,10 +117,6 @@ contract DSMath {
 
     function wdiv(uint128 x, uint128 y) constant internal returns (uint128 z) {
         z = cast((uint256(x) * WAD + y / 2) / y);
-    }
-
-    function wpow(uint128 x, uint128 n) constant internal returns (uint128) {
-        return hpow(x, n);
     }
 
     function wmin(uint128 x, uint128 y) constant internal returns (uint128) {
