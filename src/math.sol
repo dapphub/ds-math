@@ -34,10 +34,10 @@ contract DSMath {
     }
 
     function min(uint256 x, uint256 y) constant internal returns (uint256 z) {
-        return (x <= y) ? x : y;
+        return x <= y ? x : y;
     }
     function max(uint256 x, uint256 y) constant internal returns (uint256 z) {
-        return (x >= y) ? x : y;
+        return x >= y ? x : y;
     }
 
     /*
@@ -62,10 +62,10 @@ contract DSMath {
     }
 
     function hmin(uint128 x, uint128 y) constant internal returns (uint128 z) {
-        return (x <= y) ? x : y;
+        return x <= y ? x : y;
     }
     function hmax(uint128 x, uint128 y) constant internal returns (uint128 z) {
-        return (x >= y) ? x : y;
+        return x >= y ? x : y;
     }
 
 
@@ -74,10 +74,10 @@ contract DSMath {
      */
 
     function imin(int256 x, int256 y) constant internal returns (int256 z) {
-        return (x <= y) ? x : y;
+        return x <= y ? x : y;
     }
     function imax(int256 x, int256 y) constant internal returns (int256 z) {
-        return (x >= y) ? x : y;
+        return x >= y ? x : y;
     }
 
     /*
