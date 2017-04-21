@@ -16,8 +16,24 @@ contract DSMath {
         assert((z = x + y) >= x);
     }
 
+    function add(uint128 x, uint128 y) constant returns (uint128) {
+        return incr(uint128(x), uint128(y));
+    }
+
     function decr(uint128 x, uint128 y) constant returns (uint128 z) {
         assert((z = x - y) <= x);
+    }
+
+    function subtract(uint128 x, uint128 y) constant returns (uint128) {
+        return decr(x, y);
+    }
+
+    function mul(uint128 x, uint128 y) constant returns (uint128 z) {
+        assert((z = x * y) >= x);
+    }
+
+    function multiply(uint128 x, uint128 y) constant returns (uint128) {
+        return mul(x, y);
     }
 
     function cast(uint256 x) constant returns (uint128 z) {
@@ -30,8 +46,16 @@ contract DSMath {
         z = cast((uint256(x) * y + WAD / 2) / WAD);
     }
 
+    function multiplyWad(uint128 x, uint128 y) constant returns (uint128) {
+        return wmul(x, y);
+    }
+
     function wdiv(uint128 x, uint128 y) constant returns (uint128 z) {
         z = cast((uint256(x) * WAD + y / 2) / y);
+    }
+
+    function divideWad(uint128 x, uint128 y) constant returns (uint128) {
+        return wdiv(x, y);
     }
 
     uint128 constant RAY = 10 ** 36;
@@ -40,8 +64,16 @@ contract DSMath {
         z = cast((uint256(x) * y + RAY / 2) / RAY);
     }
 
+    function multiplyRay(uint128 x, uint128 y) constant returns (uint128) {
+        return rmul(x, y);
+    }
+
     function rdiv(uint128 x, uint128 y) constant returns (uint128 z) {
         z = cast((uint256(x) * RAY + y / 2) / y);
+    }
+
+    function divideRay(uint128 x, uint128 y) constant returns (uint128) {
+        return rdiv(x, y);
     }
 
     function rpow(uint128 x, uint64 n) constant returns (uint128 z) {
@@ -54,6 +86,10 @@ contract DSMath {
                 z = rmul(z, x);
             }
         }
+    }
+
+    function powRay(uint128 x, uint64 n) constant returns (uint128) {
+        return rpow(x, n);
     }
 
     function min(uint128 x, uint128 y) constant internal returns (uint128 z) {
