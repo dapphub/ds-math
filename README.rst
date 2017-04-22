@@ -111,7 +111,7 @@ This function returns the larger number between ``x`` and ``y``.
 
     function max(uint256 x, uint256 y) constant internal returns (uint256 z)
 
-.. _hadd:
+.. _hadd: https://github.com/dapphub/ds-math#function-hadd
 
 function hadd
 ^^^^^^^^^^^^^
@@ -122,7 +122,7 @@ This function will return ``x + y`` unless it results in a ``uint128`` overflow,
 
     function hadd(uint128 x, uint128 y) constant internal returns (uint128 z)
 
-.. _hsub:
+.. _hsub: https://github.com/dapphub/ds-math#function-hsub
 
 function hsub
 ^^^^^^^^^^^^^
@@ -151,7 +151,7 @@ This function will return ``x / y`` unless ``y`` is equal to 0, in which case it
 
     function hdiv(uint128 x, uint128 y) constant internal returns (uint128 z)
 
-.. _hmin:
+.. _hmin: https://github.com/dapphub/ds-math#function-hmin
 
 function hmin
 ^^^^^^^^^^^^^
@@ -163,7 +163,7 @@ This function returns the smaller number between ``x`` and ``y``.
     function hmin(uint128 x, uint128 y) constant internal returns (uint128 z)
 
 
-.. _hmax:
+.. _hmax: https://github.com/dapphub/ds-math#function-hmax
 
 function hmax
 ^^^^^^^^^^^^^
