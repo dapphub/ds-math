@@ -3,7 +3,7 @@
 DS-Math
 #######
 
-.. |readthedocs| image:: image:: https://img.shields.io/badge/view%20docs-readthedocs-blue.svg?style=flat-square
+.. |readthedocs| image:: https://img.shields.io/badge/view%20docs-readthedocs-blue.svg?style=flat-square
    :target: https://dappsys.readthedocs.io   
 
 .. |chat| image:: https://img.shields.io/badge/community-chat-blue.svg?style=flat-square
