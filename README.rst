@@ -3,8 +3,8 @@
 DS-Math
 #######
 
-.. image:: https://img.shields.io/badge/view%20source-github-blue.svg?style=flat-square
-   :target: https://github.com/dapphub/ds-math
+.. image:: https://img.shields.io/badge/view%20docs-readthedocs-blue.svg?style=flat-square
+   :target: https://dappsys.readthedocs.io
 
 DS-Math provides arithmetic functions for the common numerical primitive types of Solidity. You can safely add, subtract, multiply, and divide ``uint256`` and ``uint128`` numbers without fear of integer overflow. You can also conveniently find the minimum and maximum of two ``uint256``, ``uint128``, or ``int256`` numbers.
 
@@ -197,7 +197,7 @@ This function returns the larger number between ``x`` and ``y``.
 function wadd
 ^^^^^^^^^^^^^
 
-Alias for :ref:`hadd <hadd>`.
+Alias for hadd_.
 
 ::
     
@@ -206,7 +206,7 @@ Alias for :ref:`hadd <hadd>`.
 function wsub
 ^^^^^^^^^^^^^
 
-Alias for :ref:`hsub <hsub>`.
+Alias for hsub_.
 
 ::
     
@@ -233,7 +233,7 @@ This function will divide two Wads and return a new Wad with the correct level o
 function wmin
 ^^^^^^^^^^^^^
 
-Alias for :ref:`hmin <hmin>`.
+Alias for hmin_.
 
 ::
     
@@ -242,7 +242,7 @@ Alias for :ref:`hmin <hmin>`.
 function wmax
 ^^^^^^^^^^^^^
 
-Alias for :ref:`hmax <hmax>`.
+Alias for hmax_.
 
 ::
     
@@ -251,7 +251,7 @@ Alias for :ref:`hmax <hmax>`.
 function radd
 ^^^^^^^^^^^^^
 
-Alias for :ref:`hadd <hadd>`.
+Alias for hadd_.
 
 ::
     
@@ -260,7 +260,7 @@ Alias for :ref:`hadd <hadd>`.
 function rsub
 ^^^^^^^^^^^^^
 
-Alias for :ref:`hsub <hsub>`.
+Alias hsub_.
 
 ::
     
@@ -297,7 +297,7 @@ This function will raise a Ray to the n^th power and return a new Ray with the c
 function rmin
 ^^^^^^^^^^^^^
 
-Alias for :ref:`hmin <hmin>`.
+Alias for hmin_.
 
 ::
     
@@ -306,7 +306,7 @@ Alias for :ref:`hmin <hmin>`.
 function rmax
 ^^^^^^^^^^^^^
 
-Alias for :ref:`hmax <hmax>`.
+Alias for hmax_.
 
 ::
     
