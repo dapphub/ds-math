@@ -3,8 +3,14 @@
 DS-Math
 #######
 
-.. image:: https://img.shields.io/badge/view%20docs-readthedocs-blue.svg?style=flat-square
-   :target: https://dappsys.readthedocs.io
+.. |readthedocs| image:: image:: https://img.shields.io/badge/view%20docs-readthedocs-blue.svg?style=flat-square
+   :target: https://dappsys.readthedocs.io   
+
+.. |chat| image:: https://img.shields.io/badge/community-chat-blue.svg?style=flat-square
+   :target: https://dapphub.chat
+   
+|readthedocs|  |chat|
+
 
 DS-Math provides arithmetic functions for the common numerical primitive types of Solidity. You can safely add, subtract, multiply, and divide ``uint256`` and ``uint128`` numbers without fear of integer overflow. You can also conveniently find the minimum and maximum of two ``uint256``, ``uint128``, or ``int256`` numbers.
 
