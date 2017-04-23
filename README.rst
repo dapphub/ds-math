@@ -42,7 +42,7 @@ The ``int256`` functions have an ``i`` prefix: ``imin``, and ``imax``.
 
 Wad functions have a ``w`` prefix: ``wadd``, ``wsub``, ``wmul``, ``wdiv``, ``wmin``, and ``wmax``.
 
-Ray functions have a ``r`` prefix: ``radd``, ``rsub``, ``rmul``, ``rdiv``, ``rmin``, and ``rmax``.
+Ray functions have a ``r`` prefix: ``radd``, ``rsub``, ``rmul``, ``rdiv``, ``rpow``, ``rmin``, and ``rmax``.
 
 DSMath
 ======
