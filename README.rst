@@ -4,7 +4,7 @@ DS-Math
 #######
 
 .. |readthedocs| image:: https://img.shields.io/badge/view%20docs-readthedocs-blue.svg?style=flat-square
-   :target: https://dappsys.readthedocs.io   
+   :target: https://dappsys.readthedocs.io/en/latest/ds_math.html   
 
 .. |chat| image:: https://img.shields.io/badge/community-chat-blue.svg?style=flat-square
    :target: https://dapphub.chat
