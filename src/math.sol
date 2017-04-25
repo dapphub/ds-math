@@ -113,7 +113,7 @@ contract DSMath {
     RAY math
      */
 
-    uint128 constant RAY = 10 ** 36;
+    uint128 constant RAY = 10 ** 27;
 
     function radd(uint128 x, uint128 y) constant internal returns (uint128) {
         return hadd(x, y);

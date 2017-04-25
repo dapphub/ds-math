@@ -16,7 +16,7 @@ DS-Math provides arithmetic functions for the common numerical primitive types o
 
 Additionally, this package provides arithmetic functions for new two higher level numerical concepts called Wad and Ray. These are used to represent decimal numbers using a ``uint128``, as the Solidity compiler does not yet support fixed-point mathematics natively (e.g. representing the number ``3.141592`` as ``3141592``). 
 
-A Wad is a decimal number with 18 digits of precision and a Ray is a decimal number with 36 digits of precision. These functions are necessary to account for the difference between how integer arithmetic behaves normally, and how decimal arithmetic should actually work. A brief example using ``wmul``, which returns the product of two Wads:
+A Wad is a decimal number with 18 digits of precision and a Ray is a decimal number with 27 digits of precision. These functions are necessary to account for the difference between how integer arithmetic behaves normally, and how decimal arithmetic should actually work. A brief example using ``wmul``, which returns the product of two Wads:
 
 ::
 
@@ -275,7 +275,7 @@ Alias hsub_.
 function rmul
 ^^^^^^^^^^^^^
 
-This function will multiply two Rays and return a new Ray with the correct level of precision. A Ray is a decimal number with 36 digits of precision that is being represented as an integer. To learn more, see the introduction to DS-Math above.
+This function will multiply two Rays and return a new Ray with the correct level of precision. A Ray is a decimal number with 27 digits of precision that is being represented as an integer. To learn more, see the introduction to DS-Math above.
 
 ::
     
@@ -284,7 +284,7 @@ This function will multiply two Rays and return a new Ray with the correct level
 function rdiv
 ^^^^^^^^^^^^^
 
-This function will divide two Rays and return a new Ray with the correct level of precision. A Ray is a decimal number with 36 digits of precision that is being represented as an integer. To learn more, see the introduction to DS-Math above.
+This function will divide two Rays and return a new Ray with the correct level of precision. A Ray is a decimal number with 27 digits of precision that is being represented as an integer. To learn more, see the introduction to DS-Math above.
 
 ::
 
@@ -294,7 +294,7 @@ This function will divide two Rays and return a new Ray with the correct level o
 function rpow
 ^^^^^^^^^^^^^
 
-This function will raise a Ray to the n^th power and return a new Ray with the correct level of precision. A Ray is a decimal number with 36 digits of precision that is being represented as an integer. To learn more, see the introduction to DS-Math above.
+This function will raise a Ray to the n^th power and return a new Ray with the correct level of precision. A Ray is a decimal number with 27 digits of precision that is being represented as an integer. To learn more, see the introduction to DS-Math above.
 
 ::
     
