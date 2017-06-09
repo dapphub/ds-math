@@ -35,7 +35,7 @@ contract DSMathTest is DSTest, DSMath {
     }
 
     function testFail_mul() {
-        mul(2 ** 256 -1, 2);
+        mul(2 ** 254, 6);
     }
 
     function test_mul() {

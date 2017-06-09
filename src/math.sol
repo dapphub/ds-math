@@ -26,7 +26,8 @@ contract DSMath {
     }
 
     function mul(uint256 x, uint256 y) constant internal returns (uint256 z) {
-        assert((z = x * y) >= x);
+        z = x * y;
+        assert(x == 0 || z / x == y);
     }
 
     function div(uint256 x, uint256 y) constant internal returns (uint256 z) {
@@ -54,7 +55,8 @@ contract DSMath {
     }
 
     function hmul(uint128 x, uint128 y) constant internal returns (uint128 z) {
-        assert((z = x * y) >= x);
+        z = x * y;
+        assert(x == 0 || z / x == y);
     }
 
     function hdiv(uint128 x, uint128 y) constant internal returns (uint128 z) {
