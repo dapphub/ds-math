@@ -20,18 +20,18 @@ contract DSMathTest is DSTest, DSMath {
         add(2 ** 256 - 1, 1);
     }
     function test_add() {
-        assertEq(uint(add(0, 0)), 0);
-        assertEq(uint(add(0, 1)), 1);
-        assertEq(uint(add(1, 1)), 2);
+        assertEq(add(0, 0), 0);
+        assertEq(add(0, 1), 1);
+        assertEq(add(1, 1), 2);
     }
 
     function testFail_sub() {
         sub(0, 1);
     }
     function test_sub() {
-        assertEq(uint(sub(0, 0)), 0);
-        assertEq(uint(sub(1, 1)), 0);
-        assertEq(uint(sub(2, 1)), 1);
+        assertEq(sub(0, 0), 0);
+        assertEq(sub(1, 1), 0);
+        assertEq(sub(2, 1), 1);
     }
 
     function testFail_mul() {
@@ -39,9 +39,9 @@ contract DSMathTest is DSTest, DSMath {
     }
 
     function test_mul() {
-        assertEq(uint(mul(0, 1)), 0);
-        assertEq(uint(mul(1, 1)), 1);
-        assertEq(uint(mul(2, 1)), 2);
+        assertEq(mul(0, 1), 0);
+        assertEq(mul(1, 1), 1);
+        assertEq(mul(2, 1), 2);
     }
 
     function testFail_div() {
@@ -49,88 +49,37 @@ contract DSMathTest is DSTest, DSMath {
     }
 
     function test_div() {
-        assertEq(uint(div(0, 1)), 0);
-        assertEq(uint(div(1, 1)), 1);
-        assertEq(uint(div(4, 2)), 2);
+        assertEq(div(0, 1), 0);
+        assertEq(div(1, 1), 1);
+        assertEq(div(4, 2), 2);
     }
 
     function test_min() {
-        assertEq(uint(min(1, 1)), 1);
-        assertEq(uint(min(1, 2)), 1);
+        assertEq(min(1, 1), 1);
+        assertEq(min(1, 2), 1);
     }
 
     function test_max() {
-        assertEq(uint(max(1, 1)), 1);
-        assertEq(uint(max(1, 2)), 2);
-    }
-
-
-    // uint128 tests
-
-    function testFail_hadd() {
-        hadd(2 ** 128 - 1, 1);
-    }
-    function test_hadd() {
-        assertEq(uint(hadd(0, 0)), 0);
-        assertEq(uint(hadd(0, 1)), 1);
-        assertEq(uint(hadd(1, 1)), 2);
-    }
-
-    function testFail_hsub() {
-        hsub(0, 1);
-    }
-    function test_hsub() {
-        assertEq(uint(hsub(0, 0)), 0);
-        assertEq(uint(hsub(1, 1)), 0);
-        assertEq(uint(hsub(2, 1)), 1);
-    }
-
-    function testFail_hmul() {
-        hmul(2 ** 128 -1, 2);
-    }
-
-    function test_hmul() {
-        assertEq(uint(hmul(0, 1)), 0);
-        assertEq(uint(hmul(1, 1)), 1);
-        assertEq(uint(hmul(2, 1)), 2);
-    }
-
-    function testFail_hdiv() {
-        hdiv(0, 0);
-    }
-
-    function test_hdiv() {
-        assertEq(uint(hdiv(0, 1)), 0);
-        assertEq(uint(hdiv(1, 1)), 1);
-        assertEq(uint(hdiv(4, 2)), 2);
-    }
-
-    function test_hmin() {
-        assertEq(uint(hmin(1, 1)), 1);
-        assertEq(uint(hmin(1, 2)), 1);
-    }
-
-    function test_hmax() {
-        assertEq(uint(hmax(1, 1)), 1);
-        assertEq(uint(hmax(1, 2)), 2);
+        assertEq(max(1, 1), 1);
+        assertEq(max(1, 2), 2);
     }
 
     // int256 tests
 
     function test_imin() {
-        assertEq(int(imin(1, 1)), 1);
-        assertEq(int(imin(1, 2)), 1);
-        assertEq(int(imin(1, -2)), -2);
+        assertEq(imin(1, 1), 1);
+        assertEq(imin(1, 2), 1);
+        assertEq(imin(1, -2), -2);
     }
 
     function test_imax() {
-        assertEq(int(imax(1, 1)), 1);
-        assertEq(int(imax(1, 2)), 2);
-        assertEq(int(imax(1, -2)), 1);
+        assertEq(imax(1, 1), 1);
+        assertEq(imax(1, 2), 2);
+        assertEq(imax(1, -2), 1);
     }
 
     function testFail_wmul_overflow() {
-        wmul(2 ** 128 - 1, 1.0 ether + 1 wei);
+        wmul(2 ** 128, 2 ** 128);
     }
     function test_wmul_trivial() {
         assertEq(uint(wmul(2 ** 128 - 1, 1.0 ether)), 2 ** 128 - 1);

@@ -12,11 +12,11 @@ DS-Math
 |readthedocs|  |chat|
 
 
-DS-Math provides arithmetic functions for the common numerical primitive types of Solidity. You can safely add, subtract, multiply, and divide ``uint256`` and ``uint128`` numbers without fear of integer overflow. You can also conveniently find the minimum and maximum of two ``uint256``, ``uint128``, or ``int256`` numbers.
+DS-Math provides arithmetic functions for the common numerical primitive types of Solidity. You can safely add, subtract, multiply, and divide ``uint`` numbers without fear of integer overflow. You can also find the minimum and maximum of two numbers.
 
-Additionally, this package provides arithmetic functions for new two higher level numerical concepts called Wad and Ray. These are used to represent decimal numbers using a ``uint128``, as the Solidity compiler does not yet support fixed-point mathematics natively (e.g. representing the number ``3.141592`` as ``3141592``). 
+Additionally, this package provides arithmetic functions for new two higher level numerical concepts called wad (18 decimals) and ray (27 decimals). These are used to represent fixed-point decimal numbers. 
 
-A Wad is a decimal number with 18 digits of precision and a Ray is a decimal number with 27 digits of precision. These functions are necessary to account for the difference between how integer arithmetic behaves normally, and how decimal arithmetic should actually work. A brief example using ``wmul``, which returns the product of two Wads:
+A wad is a decimal number with 18 digits of precision and a ray is a decimal number with 27 digits of precision. These functions are necessary to account for the difference between how integer arithmetic behaves normally, and how decimal arithmetic should actually work. A brief example using ``wmul``, which returns the product of a wad and another number:
 
 ::
 
@@ -31,23 +31,20 @@ A Wad is a decimal number with 18 digits of precision and a Ray is a decimal num
     wmul(1100000000000000000, 2200000000000000000) = 2240000000000000000
 
 
-
 **Naming Convention:** 
 
-The standard functions are considered the ``uint256`` set, so their function names are not prefixed: ``add``, ``sub``, ``mul``, ``div``, ``min``, and ``max``.
+The standard functions are the ``uint`` set, so their function names are not prefixed: ``add``, ``sub``, ``mul``, ``div``, ``min``, and ``max``.
 
-Since ``uint128`` is half the size of the standard type, ``h`` is the prefix for this set: ``hadd``, ``hsub``, ``hmul``, ``hdiv``, ``hmin``, and ``hmax``.
+The ``int`` functions have an ``i`` prefix: ``imin``, and ``imax``.
 
-The ``int256`` functions have an ``i`` prefix: ``imin``, and ``imax``.
+Wad functions have a ``w`` prefix: ``wmul``, ``wdiv``.
 
-Wad functions have a ``w`` prefix: ``wadd``, ``wsub``, ``wmul``, ``wdiv``, ``wmin``, and ``wmax``.
-
-Ray functions have a ``r`` prefix: ``radd``, ``rsub``, ``rmul``, ``rdiv``, ``rpow``, ``rmin``, and ``rmax``.
+Ray functions have a ``r`` prefix: ``rmul``, ``rdiv``, ``rpow``.
 
 DSMath
 ======
 
-Your contract should inherit from this type if you want to perform safe arithmetic functions on ``uint256``, ``uint128``, ``int256`` primitive types, or decimal numbers being represented with unsigned integers.
+Your contract should inherit from this type if you want to perform safe arithmetic functions on ``uint`` or ``int`` primitive types, or decimal numbers being represented with unsigned integers.
 
 Import
 ------
@@ -65,29 +62,29 @@ API Reference
 function add
 ^^^^^^^^^^^^
 
-This function will return ``x + y`` unless it results in a ``uint256`` overflow, in which case it will throw an exception.
+This function will return ``x + y`` unless it results in a ``uint`` overflow, in which case it will throw an exception.
 
 ::
 
-    function add(uint256 x, uint256 y) constant internal returns (uint256 z)
+    function add(uint x, uint y) constant internal returns (uint z)
 
 function sub
 ^^^^^^^^^^^^
 
-This function will return ``x - y`` unless it results in a ``uint256`` overflow, in which case it will throw an exception.
+This function will return ``x - y`` unless it results in a ``uint`` overflow, in which case it will throw an exception.
 
 ::
 
-    function sub(uint256 x, uint256 y) constant internal returns (uint256 z)
+    function sub(uint x, uint y) constant internal returns (uint z)
 
 function mul
 ^^^^^^^^^^^^
 
-This function will return ``x * y`` unless it results in a ``uint256`` overflow, in which case it will throw an exception.
+This function will return ``x * y`` unless it results in a ``uint`` overflow, in which case it will throw an exception.
 
 ::
 
-    function mul(uint256 x, uint256 y) constant internal returns (uint256 z)
+    function mul(uint x, uint y) constant internal returns (uint z)
 
 function div
 ^^^^^^^^^^^^
@@ -96,7 +93,7 @@ This function will return ``x / y`` unless ``y`` is equal to 0, in which case it
 
 ::
 
-    function div(uint256 x, uint256 y) constant internal returns (uint256 z)
+    function div(uint x, uint y) constant internal returns (uint z)
 
 function min
 ^^^^^^^^^^^^
@@ -105,7 +102,7 @@ This function returns the smaller number between ``x`` and ``y``.
 
 ::
 
-    function min(uint256 x, uint256 y) constant internal returns (uint256 z)
+    function min(uint x, uint y) constant internal returns (uint z)
 
 
 function max
@@ -115,70 +112,8 @@ This function returns the larger number between ``x`` and ``y``.
 
 ::
 
-    function max(uint256 x, uint256 y) constant internal returns (uint256 z)
+    function max(uint x, uint y) constant internal returns (uint z)
 
-.. _hadd: https://github.com/dapphub/ds-math#function-hadd
-
-function hadd
-^^^^^^^^^^^^^
-
-This function will return ``x + y`` unless it results in a ``uint128`` overflow, in which case it will throw an exception.
-
-::
-
-    function hadd(uint128 x, uint128 y) constant internal returns (uint128 z)
-
-.. _hsub: https://github.com/dapphub/ds-math#function-hsub
-
-function hsub
-^^^^^^^^^^^^^
-
-This function will return ``x - y`` unless it results in a ``uint128`` overflow, in which case it will throw an exception.
-
-::
-
-    function hsub(uint128 x, uint128 y) constant internal returns (uint128 z)
-
-function hmul
-^^^^^^^^^^^^^
-
-This function will return ``x * y`` unless it results in a ``uint128`` overflow, in which case it will throw an exception.
-
-::
-
-    function hmul(uint128 x, uint128 y) constant internal returns (uint128 z)
-
-function hdiv
-^^^^^^^^^^^^^
-
-This function will return ``x / y`` unless ``y`` is equal to 0, in which case it will throw an exception.
-
-::
-
-    function hdiv(uint128 x, uint128 y) constant internal returns (uint128 z)
-
-.. _hmin: https://github.com/dapphub/ds-math#function-hmin
-
-function hmin
-^^^^^^^^^^^^^
-
-This function returns the smaller number between ``x`` and ``y``.
-
-::
-
-    function hmin(uint128 x, uint128 y) constant internal returns (uint128 z)
-
-
-.. _hmax: https://github.com/dapphub/ds-math#function-hmax
-
-function hmax
-^^^^^^^^^^^^^
-
-This function returns the larger number between ``x`` and ``y``.
-
-::
-
-    function hmax(uint128 x, uint128 y) constant internal returns (uint128 z)
 
 function imin
 ^^^^^^^^^^^^^
@@ -200,24 +135,6 @@ This function returns the larger number between ``x`` and ``y``.
     function imax(int256 x, int256 y) constant internal returns (int256 z)
 
 
-function wadd
-^^^^^^^^^^^^^
-
-Alias for hadd_.
-
-::
-    
-    function wadd(uint128 x, uint128 y) constant internal returns (uint128)
-
-function wsub
-^^^^^^^^^^^^^
-
-Alias for hsub_.
-
-::
-    
-    function wsub(uint128 x, uint128 y) constant internal returns (uint128)
-
 function wmul
 ^^^^^^^^^^^^^
 
@@ -225,7 +142,7 @@ This function will multiply two Wads and return a new Wad with the correct level
 
 ::
 
-    function wmul(uint128 x, uint128 y) constant internal returns (uint128 z)
+    function wmul(uint x, uint y) constant internal returns (uint z)
 
 function wdiv
 ^^^^^^^^^^^^^
@@ -234,43 +151,7 @@ This function will divide two Wads and return a new Wad with the correct level o
 
 ::
     
-    function wdiv(uint128 x, uint128 y) constant internal returns (uint128 z)
-
-function wmin
-^^^^^^^^^^^^^
-
-Alias for hmin_.
-
-::
-    
-    function wmin(uint128 x, uint128 y) constant internal returns (uint128)
-
-function wmax
-^^^^^^^^^^^^^
-
-Alias for hmax_.
-
-::
-    
-    function wmax(uint128 x, uint128 y) constant internal returns (uint128)
-
-function radd
-^^^^^^^^^^^^^
-
-Alias for hadd_.
-
-::
-    
-    function radd(uint128 x, uint128 y) constant internal returns (uint128)
-
-function rsub
-^^^^^^^^^^^^^
-
-Alias hsub_.
-
-::
-    
-    function rsub(uint128 x, uint128 y) constant internal returns (uint128)
+    function wdiv(uint x, uint y) constant internal returns (uint z)
 
 function rmul
 ^^^^^^^^^^^^^
@@ -279,7 +160,7 @@ This function will multiply two Rays and return a new Ray with the correct level
 
 ::
     
-    function rmul(uint128 x, uint128 y) constant internal returns (uint128 z)
+    function rmul(uint x, uint y) constant internal returns (uint z)
 
 function rdiv
 ^^^^^^^^^^^^^
@@ -288,7 +169,7 @@ This function will divide two Rays and return a new Ray with the correct level o
 
 ::
 
-    function rdiv(uint128 x, uint128 y) constant internal returns (uint128 z)
+    function rdiv(uint x, uint y) constant internal returns (uint z)
 
 
 function rpow
@@ -298,33 +179,4 @@ This function will raise a Ray to the n^th power and return a new Ray with the c
 
 ::
     
-    function rpow(uint128 x, uint64 n) constant internal returns (uint128 z)
-
-function rmin
-^^^^^^^^^^^^^
-
-Alias for hmin_.
-
-::
-    
-    function rmin(uint128 x, uint128 y) constant internal returns (uint128)
-
-function rmax
-^^^^^^^^^^^^^
-
-Alias for hmax_.
-
-::
-    
-    function rmax(uint128 x, uint128 y) constant internal returns (uint128)
-
-function cast
-^^^^^^^^^^^^^
-
-This function will transform a ``uint256`` into a ``uint128`` and return it after asserting that it is equal to the original parameter ``x``.
-
-::
-
-    function cast(uint256 x) constant internal returns (uint128 z)
-
-
+    function rpow(uint x, uint n) constant internal returns (uint z)
