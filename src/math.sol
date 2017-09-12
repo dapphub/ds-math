@@ -13,15 +13,15 @@ pragma solidity ^0.4.13;
 
 contract DSMath {
     function add(uint x, uint y) constant internal returns (uint z) {
-        assert((z = x + y) >= x);
+        require((z = x + y) >= x);
     }
     function sub(uint x, uint y) constant internal returns (uint z) {
-        assert((z = x - y) <= x);
+        require((z = x - y) <= x);
     }
 
     function mul(uint x, uint y) constant internal returns (uint z) {
         z = x * y;
-        assert(x == 0 || z / x == y);
+        require(x == 0 || z / x == y);
     }
     function div(uint x, uint y) constant internal returns (uint z) {
         z = x / y;
@@ -45,7 +45,7 @@ contract DSMath {
 
     function wmul(uint x, uint y) constant internal returns (uint z) {
         z = (x * y + WAD / 2) / WAD;
-        assert(x == 0 || wdiv(z, x) == y);
+        require(x == 0 || wdiv(z, x) == y);
     }
     function wdiv(uint x, uint y) constant internal returns (uint z) {
         z = (x * WAD + y / 2) / y;
@@ -55,7 +55,7 @@ contract DSMath {
 
     function rmul(uint x, uint y) constant internal returns (uint z) {
         z = (x * y + RAY / 2) / RAY;
-        assert(x == 0 || rdiv(z, x) == y);
+        require(x == 0 || rdiv(z, x) == y);
     }
     function rdiv(uint x, uint y) constant internal returns (uint z) {
         z = (x * RAY + y / 2) / y;
