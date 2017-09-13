@@ -13,9 +13,6 @@ import "ds-test/test.sol";
 import "./math.sol";
 
 contract DSMathTest is DSTest, DSMath {
-    
-    // uint256 tests
-
     function testFail_add() {
         add(2 ** 256 - 1, 1);
     }
@@ -58,20 +55,15 @@ contract DSMathTest is DSTest, DSMath {
         assertEq(min(1, 1), 1);
         assertEq(min(1, 2), 1);
     }
-
     function test_max() {
         assertEq(max(1, 1), 1);
         assertEq(max(1, 2), 2);
     }
-
-    // int256 tests
-
     function test_imin() {
         assertEq(imin(1, 1), 1);
         assertEq(imin(1, 2), 1);
         assertEq(imin(1, -2), -2);
     }
-
     function test_imax() {
         assertEq(imax(1, 1), 1);
         assertEq(imax(1, 2), 2);
@@ -82,27 +74,41 @@ contract DSMathTest is DSTest, DSMath {
         wmul(2 ** 128, 2 ** 128);
     }
     function test_wmul_trivial() {
-        assertEq(uint(wmul(2 ** 128 - 1, 1.0 ether)), 2 ** 128 - 1);
-        assertEq(uint(wmul(0.0 ether, 0.0 ether)), 0.0 ether);
-        assertEq(uint(wmul(0.0 ether, 1.0 ether)), 0.0 ether);
-        assertEq(uint(wmul(1.0 ether, 0.0 ether)), 0.0 ether);
-        assertEq(uint(wmul(1.0 ether, 1.0 ether)), 1.0 ether);
+        assertEq(wmul(2 ** 128 - 1, 1.0 ether), 2 ** 128 - 1);
+        assertEq(wmul(0.0 ether, 0.0 ether), 0.0 ether);
+        assertEq(wmul(0.0 ether, 1.0 ether), 0.0 ether);
+        assertEq(wmul(1.0 ether, 0.0 ether), 0.0 ether);
+        assertEq(wmul(1.0 ether, 1.0 ether), 1.0 ether);
     }
     function test_wmul_fractions() {
-        assertEq(uint(wmul(1.0 ether, 0.2 ether)), 0.2 ether);
-        assertEq(uint(wmul(2.0 ether, 0.2 ether)), 0.4 ether);
+        assertEq(wmul(1.0 ether, 0.2 ether), 0.2 ether);
+        assertEq(wmul(2.0 ether, 0.2 ether), 0.4 ether);
     }
 
     function testFail_wdiv_zero() {
         wdiv(1.0 ether, 0.0 ether);
     }
     function test_wdiv_trivial() {
-        assertEq(uint(wdiv(0.0 ether, 1.0 ether)), 0.0 ether);
-        assertEq(uint(wdiv(1.0 ether, 1.0 ether)), 1.0 ether);
+        assertEq(wdiv(0.0 ether, 1.0 ether), 0.0 ether);
+        assertEq(wdiv(1.0 ether, 1.0 ether), 1.0 ether);
     }
     function test_wdiv_fractions() {
-        assertEq(uint(wdiv(1.0 ether, 2.0 ether)), 0.5 ether);
-        assertEq(uint(wdiv(2.0 ether, 2.0 ether)), 1.0 ether);
+        assertEq(wdiv(1.0 ether, 2.0 ether), 0.5 ether);
+        assertEq(wdiv(2.0 ether, 2.0 ether), 1.0 ether);
     }
 
+    function test_wmul_rounding() {
+        uint a = .950000000000005647 ether;
+        uint b = .000000001 ether;
+        uint c = .00000000095 ether;
+        assertEq(wmul(a, b), c);
+        assertEq(wmul(b, a), c);
+    }
+    function test_rmul_rounding() {
+        uint a = 1 ether;
+        uint b = .95 ether * 10**9 + 5647;
+        uint c = .95 ether;
+        assertEq(rmul(a, b), c);
+        assertEq(rmul(b, a), c);
+    }
 }

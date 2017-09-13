@@ -20,20 +20,20 @@ A wad is a decimal number with 18 digits of precision and a ray is a decimal num
 
 ::
 
-    1.1 * 2.2 = 2.24
+    1.1 * 2.2 == 2.24
 
     Regular integer arithmetic adds orders of magnitude:
 
-    110 * 220 = 22400
+    110 * 220 == 22400
 
     Wad arithmetic does not add orders of magnitude:
 
-    wmul(1100000000000000000, 2200000000000000000) = 2240000000000000000
+    wmul(1.1 ether, 2.2 ether) == 2.24 ether
 
 
 **Naming Convention:** 
 
-The standard functions are the ``uint`` set, so their function names are not prefixed: ``add``, ``sub``, ``mul``, ``div``, ``min``, and ``max``.
+The standard functions are the ``uint`` set, so their function names are not prefixed: ``add``, ``sub``, ``mul``, ``min``, and ``max``.  There is no ``div`` function, as divide-by-zero checking is built into the Solidity compiler.
 
 The ``int`` functions have an ``i`` prefix: ``imin``, and ``imax``.
 
@@ -66,7 +66,7 @@ This function will return ``x + y`` unless it results in a ``uint`` overflow, in
 
 ::
 
-    function add(uint x, uint y) constant internal returns (uint z)
+    function add(uint x, uint y) internal returns (uint z)
 
 function sub
 ^^^^^^^^^^^^
@@ -75,7 +75,7 @@ This function will return ``x - y`` unless it results in a ``uint`` overflow, in
 
 ::
 
-    function sub(uint x, uint y) constant internal returns (uint z)
+    function sub(uint x, uint y) internal returns (uint z)
 
 function mul
 ^^^^^^^^^^^^
@@ -84,16 +84,8 @@ This function will return ``x * y`` unless it results in a ``uint`` overflow, in
 
 ::
 
-    function mul(uint x, uint y) constant internal returns (uint z)
+    function mul(uint x, uint y) internal returns (uint z)
 
-function div
-^^^^^^^^^^^^
-
-This function will return ``x / y`` unless ``y`` is equal to 0, in which case it will throw an exception.
-
-::
-
-    function div(uint x, uint y) constant internal returns (uint z)
 
 function min
 ^^^^^^^^^^^^
@@ -102,7 +94,7 @@ This function returns the smaller number between ``x`` and ``y``.
 
 ::
 
-    function min(uint x, uint y) constant internal returns (uint z)
+    function min(uint x, uint y) internal returns (uint z)
 
 
 function max
@@ -112,7 +104,7 @@ This function returns the larger number between ``x`` and ``y``.
 
 ::
 
-    function max(uint x, uint y) constant internal returns (uint z)
+    function max(uint x, uint y) internal returns (uint z)
 
 
 function imin
@@ -122,7 +114,7 @@ This function returns the smaller number between ``x`` and ``y``.
 
 ::
 
-    function imin(int256 x, int256 y) constant internal returns (int256 z)
+    function imin(int x, int y) internal returns (int z)
 
 
 function imax
@@ -132,7 +124,7 @@ This function returns the larger number between ``x`` and ``y``.
 
 ::
 
-    function imax(int256 x, int256 y) constant internal returns (int256 z)
+    function imax(int x, int y) internal returns (int z)
 
 
 function wmul
@@ -142,7 +134,7 @@ This function will multiply two Wads and return a new Wad with the correct level
 
 ::
 
-    function wmul(uint x, uint y) constant internal returns (uint z)
+    function wmul(uint x, uint y) internal returns (uint z)
 
 function wdiv
 ^^^^^^^^^^^^^
@@ -151,7 +143,7 @@ This function will divide two Wads and return a new Wad with the correct level o
 
 ::
     
-    function wdiv(uint x, uint y) constant internal returns (uint z)
+    function wdiv(uint x, uint y) internal returns (uint z)
 
 function rmul
 ^^^^^^^^^^^^^
@@ -160,7 +152,7 @@ This function will multiply two Rays and return a new Ray with the correct level
 
 ::
     
-    function rmul(uint x, uint y) constant internal returns (uint z)
+    function rmul(uint x, uint y) internal returns (uint z)
 
 function rdiv
 ^^^^^^^^^^^^^
@@ -169,7 +161,7 @@ This function will divide two Rays and return a new Ray with the correct level o
 
 ::
 
-    function rdiv(uint x, uint y) constant internal returns (uint z)
+    function rdiv(uint x, uint y) internal returns (uint z)
 
 
 function rpow
@@ -179,4 +171,4 @@ This function will raise a Ray to the n^th power and return a new Ray with the c
 
 ::
     
-    function rpow(uint x, uint n) constant internal returns (uint z)
+    function rpow(uint x, uint n) internal returns (uint z)
