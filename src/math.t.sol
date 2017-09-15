@@ -41,16 +41,6 @@ contract DSMathTest is DSTest, DSMath {
         assertEq(mul(2, 1), 2);
     }
 
-    function testFail_div() {
-        div(0, 0);
-    }
-
-    function test_div() {
-        assertEq(div(0, 1), 0);
-        assertEq(div(1, 1), 1);
-        assertEq(div(4, 2), 2);
-    }
-
     function test_min() {
         assertEq(min(1, 1), 1);
         assertEq(min(1, 2), 1);
