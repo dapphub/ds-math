@@ -26,7 +26,7 @@ product of a wad and another number:
 
 //Regular integer arithmetic adds orders of magnitude:
 
-110 * 220 == 22400
+110 * 220 == 24200
 
 // Wad arithmetic does not add orders of magnitude:
 
