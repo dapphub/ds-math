@@ -6,7 +6,7 @@
 
 _Safe Arithmetic_
 
-DS-Math provides arithmetic functions for the common numerical primitive typesi
+DS-Math provides arithmetic functions for the common numerical primitive types
  of Solidity. You can safely add, subtract, multiply, and divide `uint` numbers 
 without fear of integer overflow. You can also find the minimum and maximum of 
 two numbers.
