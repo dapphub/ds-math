@@ -22,7 +22,7 @@ arithmetic should actually work. A brief example using `wmul`, which returns the
 product of a wad and another number:
 
 ```solidity
-1.1 * 2.2 == 2.24
+1.1 * 2.2 == 2.42
 
 //Regular integer arithmetic adds orders of magnitude:
 
@@ -30,7 +30,7 @@ product of a wad and another number:
 
 // Wad arithmetic does not add orders of magnitude:
 
-wmul(1.1 ether, 2.2 ether) == 2.24 ether
+wmul(1.1 ether, 2.2 ether) == 2.42 ether
 ```
 
 ### Naming Convention
