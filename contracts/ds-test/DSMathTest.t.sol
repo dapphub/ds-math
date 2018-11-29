@@ -13,8 +13,8 @@
 
 pragma solidity >0.4.13;
 
-import "./ds-test/DSTest.sol";
-import "./DSMath.sol";
+import "./DSTest.sol";
+import "../DSMath.sol";
 
 contract DSMathTest is DSTest, DSMath {
     function testFail_add() public pure {
