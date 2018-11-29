@@ -15,70 +15,60 @@
 
 pragma solidity 0.4.24;
 
-contract DSMath {
-    function add(uint x, uint y) public pure returns (uint z) {
-        require((z = x + y) >= x, "ds-math-add-overflow");
-    }
-    function sub(uint x, uint y) public pure returns (uint z) {
-        require((z = x - y) <= x, "ds-math-sub-underflow");
-    }
-    function mul(uint x, uint y) public pure returns (uint z) {
-        require(y == 0 || (z = x * y) / y == x, "ds-math-mul-overflow");
-    }
+import "./DSMathL.sol";
 
-    function min(uint x, uint y) public pure returns (uint z) {
-        return x <= y ? x : y;
-    }
-    function max(uint x, uint y) public pure returns (uint z) {
-        return x >= y ? x : y;
-    }
-    function imin(int x, int y) public pure returns (int z) {
-        return x <= y ? x : y;
-    }
-    function imax(int x, int y) public pure returns (int z) {
-        return x >= y ? x : y;
-    }
+contract DSMath {
+    using DSMathL for uint;
+    using DSMathL for int;
 
     uint constant WAD = 10 ** 18;
     uint constant RAY = 10 ** 27;
 
-    function wmul(uint x, uint y) public pure returns (uint z) {
-        z = add(mul(x, y), WAD / 2) / WAD;
+    function add(uint x, uint y) public pure returns (uint z) {
+        return x.ds_add(y);
     }
-    function rmul(uint x, uint y) public pure returns (uint z) {
-        z = add(mul(x, y), RAY / 2) / RAY;
-    }
-    function wdiv(uint x, uint y) public pure returns (uint z) {
-        z = add(mul(x, WAD), y / 2) / y;
-    }
-    function rdiv(uint x, uint y) public pure returns (uint z) {
-        z = add(mul(x, RAY), y / 2) / y;
+    
+    function sub(uint x, uint y) public pure returns (uint z) {
+        return x.ds_sub(y);
     }
 
-    // This famous algorithm is called "exponentiation by squaring"
-    // and calculates x^n with x as fixed-point and n as regular unsigned.
-    //
-    // It's O(log n), instead of O(n) for naive repeated multiplication.
-    //
-    // These facts are why it works:
-    //
-    //  If n is even, then x^n = (x^2)^(n/2).
-    //  If n is odd,  then x^n = x * x^(n-1),
-    //   and applying the equation for even x gives
-    //    x^n = x * (x^2)^((n-1) / 2).
-    //
-    //  Also, EVM division is flooring and
-    //    floor[(n-1) / 2] = floor[n / 2].
-    //
-    function rpow(uint x, uint n) public pure returns (uint z) {
-        z = n % 2 != 0 ? x : RAY;
+    function mul(uint x, uint y) public pure returns (uint z) {
+        return x.ds_mul(y);
+    }
 
-        for (n /= 2; n != 0; n /= 2) {
-            x = rmul(x, x);
+    function min(uint x, uint y) public pure returns (uint z) {
+        return x.ds_min(y);
+    }
 
-            if (n % 2 != 0) {
-                z = rmul(z, x);
-            }
-        }
+    function max(uint x, uint y) public pure returns (uint z) {
+        return x.ds_max(y);
+    }
+
+    function imin(int x, int y) public pure returns (int z) {
+        return x.ds_imin(y);
+    }
+
+    function imax(int x, int y) public pure returns (int z) {
+        return x.ds_imax(y);
+    }
+
+    function wmul(uint x, uint y) public pure returns (uint) {
+        return x.ds_wmul(y);
+    }
+
+    function rmul(uint x, uint y) public pure returns (uint) {
+        return x.ds_rmul(y);
+    }
+
+    function wdiv(uint x, uint y) public pure returns (uint) {
+        return x.ds_wdiv(y);
+    }
+
+    function rdiv(uint x, uint y) public pure returns (uint) {
+        return x.ds_rdiv(y);
+    }
+
+    function rpow(uint x, uint n) public pure returns (uint) {
+        return x.ds_rpow(n);
     }
 }
