@@ -1,0 +1,23 @@
+{
+  "name": "ds-math",
+  "version": "1.0.0",
+  "description": "<h2>DSMath   <small class=\"text-muted\">     <a href=\"https://github.com/dapphub/ds-math\"><span class=\"fa fa-github\"></span></a>   </small> </h2>",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-as-conda:dapphub/ds-math.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0"
+  },
+  "dependencies": {}
+}
