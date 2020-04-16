@@ -51,7 +51,7 @@ Ray functions have a `r` prefix: `rmul`, `rdiv`, `rpow`.
 Return `x + y` or an exception in case of `uint` overflow.
 
 #### `sub`
-Return `x - y` or an exception in case of `uint` overflow.
+Return `x - y` or an exception in case of `uint` underflow.
 
 #### `mul`
 Return `x * y` or an exception in case of `uint` overflow.
