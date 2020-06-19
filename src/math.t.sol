@@ -17,6 +17,8 @@ import "ds-test/test.sol";
 import "./math.sol";
 
 contract DSMathTest is DSTest, DSMath {
+    function setUp() public {}
+
     function testFail_add() public pure {
         add(2 ** 256 - 1, 1);
     }
