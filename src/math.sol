@@ -46,7 +46,7 @@ contract DSMath {
     function wmul(uint x, uint y) internal pure returns (uint z) {
         z = add(mul(x, y), WAD / 2) / WAD;
     }
-    //rounds to zero if x*y < WAD / 2
+    //rounds to zero if x*y < RAY / 2
     function rmul(uint x, uint y) internal pure returns (uint z) {
         z = add(mul(x, y), RAY / 2) / RAY;
     }
